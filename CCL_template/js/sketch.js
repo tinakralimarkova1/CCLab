@@ -8,11 +8,20 @@ let inZone = false
 let x1 = 0
 let angle = 0;
 let scaryZone = 0 
+let move = 0
+
+let scaleUP = 0
+
+let end = 0
+
+let teethend1 = 0
+let rd = 0
+    
+    
 function setup() {
   let cnv = createCanvas(800, 500);
-  cnv.id("my_canvas");
+  cnv.id("my_canvas")
   cnv.parent("p5-cont")
-
 }
 
 function draw() {
@@ -38,21 +47,22 @@ function draw() {
       translate(RandomX,RandomY)
       tentacles()
       creatureBody()
-    tentacle_blink()
+    
     inZone = true
     
   }
   
   if(scaryZone <=200){
     tentacles()
+  
   creatureBody()
-  tentacle_blink()
+  
   }
   
 //   //END OF CREATURE
   pop()
   
- draw_man()
+ 
   
   
   
@@ -66,18 +76,38 @@ function draw() {
   }
   
   if(scaryZone >200){
-    scale(1.3 )
     push()
-  translate(-100,-30)
+    end++
+    scaleUP ++
+   translate(-scaleUP*7.76,-scaleUP *5.6)
+    scale(1 + scaleUP/50)
+    push()
+    
+    scale(1.3)
+    
+  translate(-100,-20)
     monster()
+    
+    
+   
+    monster_mouth()
+    
     pop()
+    pop()
+    
   
     
     
 
   }
+  if (end<720){
+    draw_man()
+  }
   
   
+  if(end > 500){
+    endScene()
+  }
   
   
   
@@ -169,7 +199,8 @@ function monster_mouth(){
 }
 
 function monster(){
-  scale(1 + frameCount/500)
+  
+  
   fill(40, 139, 237)
   noStroke()
   //petal 1
@@ -204,7 +235,7 @@ function monster(){
   pop()
   
   //mouth
-  monster_mouth()
+  
   
   
   
@@ -287,6 +318,7 @@ function creatureBody(){
 function tentacles(){
   
   
+  rd = Math.floor(random(1,7))
   
   //tentacle 1 START
   push()
@@ -320,6 +352,9 @@ function tentacles(){
   fill(0,0,0)
     circle(165,120,10)
   }
+  
+  
+  
   //tentacle 1 END
   
   //tentacle 2
@@ -490,6 +525,9 @@ function tentacles(){
   
 }
 
+
+
+
 function draw_man(){
   
   
@@ -538,7 +576,7 @@ function draw_man(){
      
   
 }
-  else{
+  if(pmouseX-mouseX <0){
     
     //body
     fill(56, 171, 62)
@@ -586,25 +624,14 @@ function draw_man(){
   ellipse(mouseX+3,mouseY,10,7)
   }
   
+ // mouseClicked()
+  
+  
 }
 
-function tentacle_blink(){
-  
-  
-  // for(i = frameCount; i % 50 != 0; i++){
-  //   fill(120, 10, 68);
-  //   circle(160, 400, 50); 
-  // }
-  
-//   fill(120, 10, 68);
-//   circle(160, 400, 50); 
-//   fill('white');
-//   circle(160, 400, 40-frameCount); 
-//   fill(0);
-//   circle(160, 400, 30-frameCount);
-  
-  
-}
+
+
+
 
 function locate_man(){
   if (pmouseX - mouseX <0){
@@ -618,3 +645,57 @@ function locate_man(){
   }
   
 }
+
+function endScene(){
+  
+  if (teethend1<220){
+    teethend1 = teethend1+10
+  }
+  
+  push()
+  translate(-20,450 - teethend1)
+  fill(0)
+  rect(0,30,820,250)
+  fill('red')
+    textSize(100)
+    text("DIED",300,150)
+  fill('white')
+  scale(2.8)
+  for(i=0; i <30; i++){
+    
+    
+    triangle(5 + (i*10),10,15 + (i*10),10,10 + (i*10),0)
+    square(i*10,10,10)
+    
+  }
+  pop()
+  
+  push()
+  translate(0,0 +teethend1)
+  fill('white')
+  scale(2.8)
+  for(i=0; i <30; i++){
+    
+    triangle(0+ (i*10),10,10 + (i*10),10,5 + (i*10),20)
+    triangle(0 + (i*10),10,10 + (i*10),10,5 + (i*10),0)
+    square(i*10,0,10)
+    
+  }
+  
+  fill(0)
+  rect(0,-250,800,250)
+  
+  fill('red')
+    textSize(40)
+    text("You",100,-10)
+  pop()
+  
+  
+  
+ 
+  
+  
+  // rect(0,0 + teethend1,800,50)
+  // rect(0,450 - teethend1,800,50)  
+}
+
