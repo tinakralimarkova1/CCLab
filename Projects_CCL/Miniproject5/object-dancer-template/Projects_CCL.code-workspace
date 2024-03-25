@@ -1,0 +1,14 @@
+{
+	"folders": [
+		{
+			"path": "../../CCLab/Projects_CCL"
+		},
+		{
+			"path": "."
+		}
+	],
+	"settings": {
+		"liveServer.settings.multiRootWorkspaceName": "object-dancer-template",
+		"liveServer.settings.port": 5501
+	}
+}
