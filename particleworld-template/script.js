@@ -24,7 +24,7 @@ function draw() {
     }
   }
 
-
+  // show particles 
   for (let i = 0; i < particles.length; i++) {
     particles[i].update();
     particles[i].display();
