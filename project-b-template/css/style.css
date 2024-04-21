@@ -47,6 +47,8 @@ h1{
 }
 
 #content {
+  padding: 20px;
+  margin: 0;
   text-align: left;
   color: rgb(83, 8, 87);
   font-size: 16px;
