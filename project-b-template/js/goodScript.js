@@ -1,679 +1,303 @@
-let RandomX = 0
-let RandomY = 0
-let moveX = 0
-let moveY = 0
-let constant = 20
-let inZone = false
-let x1 = 0
-let angle = 0;
-let scaryZone = 0 
-let move = 0
 
-let scaleUP = 0
+//import { totalScore } from './quiz.js';
 
-let end = 0
 
-let teethend1 = 0
-let rd = 0
+
+flowers = [];
+eyes = [];
+
+
+oValue = 0;
+changeO = false;
+checkGone = false;
+
+
+created = true;
+
 function setup() {
-    let canvas = createCanvas(800, 600);
+    let canvas = createCanvas(2016, 1153);
     canvas.parent("GoodCanvasContainer");
-    background(220);
+    
+    totalScore = getItem('totalScore');
+    flowerCounter = totalScore;
+    //console.log(totalScore);
+   
   }
   
+
 
 function draw() {
-  RandomX = random(-10,10) + random(-x1/10,x1/10)
-  RandomY = random(-10,10) + random(-x1/10,x1/10)
-  moveX += 1
-  moveY += 1
-  //background(33, 80, 97);
+
+  background(150, 214, 205);
+  texts = getItem('good');
+  totalScore = getItem('totalScore');
+  // fill(110, 103, 240,5);
+  // rect(50,250,1700,130,20);
   
-  // START OF BACKGROUNG
-      backgrnd()
-  // END OF BACKKGROUND
-  
-      //man()
-  
-  
-//   //START OF CREATURE
-  
-  inZone = false
-  push()
-  
-  if(mouseX >250 && mouseX < 550 && mouseY >60 && mouseY<450 && scaryZone <=200){
-      translate(RandomX,RandomY)
-      tentacles()
-      creatureBody()
-    
-    inZone = true
-    
-  }
-  
-  if(scaryZone <=200){
-    tentacles()
-  
-  creatureBody()
-  
-  }
-  
-//   //END OF CREATURE
-  pop()
-  
- 
-  
-  
-  
-  if (frameCount >400){
-    
-  }
-    
-  
-  if(inZone){
-    scaryZone++
-  }
-  
-  if(scaryZone >200){
-    push()
-    end++
-    scaleUP ++
-   translate(-scaleUP*7.76,-scaleUP *5.6)
-    scale(1 + scaleUP/50)
-    push()
-    
-    scale(1.3)
-    
-  translate(-100,-20)
-    monster()
-    
-    
-   
-    monster_mouth()
-    
-    pop()
-    pop()
-    
-  
-    
-    
+  // for(i = 0; i < texts.length; i++){
+  //   console.log(i)
+  //   console.log(texts[i]);
+  // }
+
+  noStroke();
+  fill(72, 140, 55);
+  rect(0,800,windowWidth,windowHeight-800);
+
+  if(created === true){
+    for(i = 0; i <totalScore; i++){
+      //console.log(totalScore);
+      flowers[i] = new Flower(random(0, 2000), random(900, 1000));
+    }
+    created = false;
 
   }
-  if (end<720){
-    draw_man()
-  }
   
-  
-  if(end > 500){
-    endScene()
-  }
-  
-  
-  
-  
-  
-}
-function monster_mouth(){
-  
-  push()
-  fill(184, 193, 207)
-  circle(400,230,90)
-  fill(0)
-  circle(400,230,70)
-  pop()
-  
-  scale(0.60)
-  translate(265,150)
-  fill('white')
-  let angleIncrement = TWO_PI / 12;
-  
-  
-  
-  // Draw rotating teeth around the circle
-  for (let i = 0; i < 16; i++) {
-    let x = 400 + cos(angle + frameCount/20 ) * 70;
-    let y = 230 + sin(angle + frameCount/20) * 70;
-    let toothX1 = x + cos(angle ) * 20;
-    let toothY1 = y + sin(angle ) * 20;
-    let toothX2 = x + cos(angle ) * 10 + 10;
-    let toothY2 = y + sin(angle ) * 10 + 10 ;
-    
-    // Draw the teeth
-    
-    triangle( toothX1, toothY1,x, y, toothX2,toothY2);
-    
-    // Increment the angle for the next tooth
-    angle += angleIncrement;
-  }
-  
-  for (let i = 0; i < 14; i++) {
-    let x = 400 + cos(-angle + frameCount/10 ) * 70;
-    let y = 230 + sin(-angle + frameCount/10 ) * 70;
-    let toothX1 = x + cos(-angle ) * 20;
-    let toothY1 = y + sin(-angle) * 20;
-    let toothX2 = x + cos(-angle ) * 10 + 8;
-    let toothY2 = y + sin(-angle) * 10 + 8;
-    
-    // Draw the teeth
-    
-    triangle( toothX1, toothY1,x, y, toothX2,toothY2);
-    
-    // Increment the angle for the next tooth
-    angle += angleIncrement;
-  }
-  
-  
-  for (let i = 0; i < 12; i++) {
-    let x = 400 + cos(-angle + frameCount/5 ) * 70;
-    let y = 230 + sin(-angle + frameCount/5 ) * 70;
-    let toothX1 = x + cos(-angle ) * 20;
-    let toothY1 = y + sin(-angle) * 20;
-    let toothX2 = x + cos(-angle ) * 10 + 5;
-    let toothY2 = y + sin(-angle) * 10 + 5;
-    
-    // Draw the teeth
-    
-    triangle( toothX1, toothY1,x, y, toothX2,toothY2);
-    
-    // Increment the angle for the next tooth
-    angle += angleIncrement;
-  }
-  
-  for (let i = 0; i < 10; i++) {
-    let x = 400 + cos(-angle + frameCount/3 ) * 70;
-    let y = 230 + sin(-angle + frameCount/3 ) * 70;
-    let toothX1 = x + cos(-angle ) * 20;
-    let toothY1 = y + sin(-angle) * 20;
-    let toothX2 = x + cos(-angle ) * 10 + 3;
-    let toothY2 = y + sin(-angle) * 10 + 3;
-    
-    // Draw the teeth
-    
-    triangle( toothX1, toothY1,x, y, toothX2,toothY2);
-    
-    // Increment the angle for the next tooth
-    angle += angleIncrement;
-  }
-  
-}
+  // flower1 = new Flower();
+  // flower1.display();
 
-function monster(){
+  for(i = 0; i < flowers.length; i++){
+    flowers[i].display();
+
+
+    
+  }
+
   
-  fill(40, 139, 237)
-  noStroke()
-  //petal 1
-  petal()
-  //petal 2
-  push()
-  translate(580,-200)
-  rotate(1.45)
-  petal()
-  pop()
-  //petal 3
-  push()
-  translate(140,602)
-  rotate(-1.5)
-  petal()
-  pop()
-  //petal 4
-   push()
-  translate(850,160)
-  rotate(2.45)
-  petal()
-  pop()
-  //petal 5
-  push()
-  translate(560,670)
-  rotate(-2.45)
-  petal()
-  pop()
-  
-  //mouth
+
   
   
-  
-  
-  
+  if (changeO === true) {
+    //circle(mouseX, mouseY, 10);
+    //console.log(oValue);
+    for (i = 0; i < flowers.length; i++) {
+      if(mouseX > flowers[i].x-40 && mouseX < flowers[i].x+40 && mouseY > flowers[i].y - 40 && mouseY < flowers[i].y+40){
+        if(oValue >=255){
+          oValue = 0;
+          changeO = false;
+          
+          //flowerCounter --;
+          
+          
+        
+        }
+        else{
+
+          oValue++
+          flowers[i].flowerClicked(oValue);
+          
         }
 
-function petal(){
-  
-  
-  beginShape()
-  curveVertex(400,50)
-  vertex(400,30)
-  vertex(350,100)
-  vertex(375,200)
-  vertex(425,200)
-  vertex(450,100)
-  vertex(400,30)
-  vertex(400,30)
-  endShape()
-  
-}
-
-function backgrnd(){
-  background(33, 80, 97);
-  push()
-  for(x=0;x<800;x += 10){
-    
-      for(i=0;i<500;i+= 10){
-        
-        noStroke()
-        fill(14 - random(-20,20), 45 - random(-20,20), 82 - random(-20,20),random(50))
-        square(x,i,100)
-         fill(60 - random(-20,20), 98 - random(-20,20), 130 - random(-20,20),random(50,80))
-        circle(sin(random(x))*30 + x,i,10)
-        circle(cos(random(i))*30 + x,i,10)
         
       }
+
   }
-  pop()
+  }
+  for(i = 0; i < eyes.length; i++){
+    eyes[i].display();
+    eyes[i].update();
+    
+   // eyes[i].update();
+  }
+  
+
+
+
+  //ending 
+  
+  // for(i = 0; i < flowers.length; i++){
+  //   if (flowers[i].this.opacity <= 0) {
+  //     break;
+  //   }
+  //   else{
+  //     checkGone = true;
+  //   }
+    
+  // }
+  //console.log(checkGone);
+
+  console.log(flowerCounter);
+
+  if(flowerCounter <= 0){
+    
+    
+
+
+    for(i = 0; i < texts.length; i++){
+
+      if(texts[i] === 'appritiationText' || texts[i] === 'congrats' || texts[i] === 'books'){
+        textSize(40);
+        fill("purple");
+
+        text("You are the type of person who uses the internet to connect with like-minded people and keep \nin touch with loved ones.", 100, 100);
+      }
+      
+      if(texts[i] === 'dog' || texts[i] === 'concert' || texts[i] === 'kangaroo' ){
+        //eyes.push(new eye(random(0, 2000), random(100, 700)));
+
+        fill(110, 103, 240,5);
+        rect(50,250,1700,130,20);
+
+        strokeWeight(4);
+        //strokeColor("red");
+
+        textSize(40);
+        //noStroke();
+        
+
+        fill("purple");
+
+        text("You are the type of person who uses the internet to share and find interesting information, \nbut also are careful of what you share.", 100, 300);
+        
+      }
+
+      if(texts[i] === 'news' || texts[i] === 'loans'){
+
+        textSize(40);
+        fill("purple");
+
+        text("You are the type of person who uses the internet to fight for what's right and important.", 100, 400);
+      
+      }
+
+      if(texts[i] === 'map' || texts[i] === 'zoom'){
+
+        textSize(40);
+
+        fill("purple"); 
+        text("You are the type of person who uses the internet to make your life easier.", 100, 500);
+
+
+      }
+
+      textSize(70);
+      fill(129, 227, 170);
+      text("But remember, they are still watching you.", 350, 950);
+
+
+    }
+
+
+
+  }
+
+  
+
+
+  
+  
+
+
+
+
+  
+  
+  
+  
+
+
 }
 
-function creatureBody(){
-  push()
-  noStroke()
-    beginShape();
-  fill(40, 139, 237)
-  curveVertex(300,400)
-  vertex(500,400)
-  vertex(500,200)
-  vertex(400,50)
-  vertex(300,200)
-  vertex(300,400)
-  vertex(450,400)
-  ellipse(400,350,231,210)
-  
-  
-  endShape(CLOSE);
-  pop()
-  
-  
-  
-  
-  push()
-  
-  //fill(13, 89, 161)
-  noFill()
-  strokeWeight(20)
-  stroke(13,89,161)
-  curve(300,100,280,345,525,345,500,100)
-  pop()
-  
-  //
-  
-  
-  
-  
-  
+
+
+function mouseClicked() {
+  changeO = true
+
 }
 
-function tentacles(){
+
+class Flower {
+  constructor(x,y) {
+    this.x = x;
+    this.y = y;
+    this.opacity = 255;
   
-  
-  rd = Math.floor(random(1,7))
-  
-  //tentacle 1 START
-  push()
-  noFill()
-  stroke(120, 10, 68)
-  strokeWeight(15)
-  bezier(300, 300, 220, 300+sin(frameCount/4)*40, 230, 130+ cos(frameCount/4)*40, 170, 130);
-  pop()
-  
-  noStroke()
-  
-  if(inZone == false){
-    
-    fill(120, 10, 68)
-  circle(165,120,50)
-  fill(255,255,255)
-  
-  circle(165,120,40)
-  fill(0,0,0)
-  circle(constrain(mouseX,160,170),constrain(mouseY,115,125),30)
   }
-  else{
-    
-    fill(204 - random(-x1/2,x1/2), 10, 114 ,80 + random(-30,30))
-  circle(165,120,1+x1)
-    fill(120, 10, 68)
-  circle(165,120,50)
-  fill(255,255,255)
+
+  display() {
+  //   fill(11, 77, 26);
+  //   rect(this.x-5, this.y, 10, 100);
   
-  circle(165,120,40)
-  fill(0,0,0)
-    circle(165,120,10)
-  }
+  // // Petals
+  // fill(255, 204, 0);
+  // translate(this.x /4, this.y/4);
+  // for (let i = 0; i < 10; i++) {
+  //   ellipse(this.x,this.y, 20, 30);
+  //   rotate(PI/5);
+  // }
+  
+  // // Center
+  // fill(255, 0, 0);
+  // ellipse(0, 0, 50, 50);
+
+
+  fill(11, 77, 26, this.opacity);
+  rect(this.x-5, this.y, 10, 100);
+  
+  fill(245, 209, 66, this.opacity);
+  ellipse(this.x,this.y+15,20,30);
+  ellipse(this.x,this.y-15,20,30);
+  
+  ellipse(this.x+15,this.y,30,20);
+  ellipse(this.x-15,this.y,30,20);
+  
+  circle(this.x+15,this.y-15,20);
+  circle(this.x-15,this.y-15,20);
+  circle(this.x-15,this.y+15,20);
+  circle(this.x+15,this.y+15,20);
   
   
   
-  //tentacle 1 END
-  
-  //tentacle 2
-   push();
-  noFill();
-  stroke(120, 10, 68);
-  strokeWeight(15);
-  bezier(500, 300, 580, 300+sin(frameCount/4)*40, 570, 130 + cos(frameCount/4)*40, 630, 130); 
-  pop();
-  
-  push()
-  noStroke();
-  
-  if(inZone == true){
-    fill(204 - random(-x1/2,x1/2), 10, 114 ,80 + random(-30,30))
-  circle(635,120,1+x1)
-    fill(120, 10, 68);
-  circle(635, 120, 50);
-  fill(255,255,255)
-  circle(635,120,40)
-  fill(0,0,0)
-    circle(635,120,10)
-  }
-  else{
-    
-    fill(120, 10, 68);
-  circle(635, 120, 50);
-  fill(255,255,255)
-  circle(635,120,40)
-  fill(0,0,0)
-      circle(constrain(mouseX,630,640),constrain(mouseY,115,125),30)
-    
+  fill(230, 39, 9, this.opacity);
+  circle(this.x,this.y,20);
+
+
 
   }
-  
-  
-  pop()
-  //tentacle 2 END
-  
-  //tentacle 3 Start
-  push()
-  stroke(120, 10, 68)
-  strokeWeight(15)
-  line(300,60,350,190)
-  pop()
-  
-  if(inZone == false){
-    fill(120, 10, 68)
-  circle(300,60,50)
-  fill('white')
-  circle(300,60,40)
-  fill(0)
-    circle(constrain(mouseX,295,305),constrain(mouseY,55,65),30)
-  }
-  else{
-    fill(204 - random(-x1/2,x1/2), 10, 114 ,80 + random(-30,30))
-  circle(300,60,1+x1)
-    fill(120, 10, 68)
-  circle(300,60,50)
-  fill('white')
-  circle(300,60,40)
-  fill(0)
-    circle(300,60,10)
-  }
-  
-  //tentacle 3 END
-  
-  //tentacle 4 START
-  push();
-  stroke(120, 10, 68);
-  strokeWeight(15);
-  line(500, 60, 450, 190); 
-  pop();
-  
-  
-  if(inZone == false){
-    fill(120, 10, 68);
-  circle(width - 300, 60, 50); 
-  fill('white');
-  circle(width - 300, 60, 40); 
-  fill(0);
-    circle(constrain(mouseX,495,505),constrain(mouseY,55,65),30)
-  }
-  else{
-    fill(204 - random(-x1/2,x1/2), 10, 114 ,80 + random(-30,30))
-  circle(width - 300,60,1+x1)
-    fill(120, 10, 68);
-  circle(width - 300, 60, 50); 
-  fill('white');
-  circle(width - 300, 60, 40); 
-  fill(0);
-    
-    circle(width - 300, 60, 10); 
-  }
-  
-  //tentacle 4 End
-  
-  //tentacle 5 Start
-  push();
-  translate(width, 0);
-  scale(-1, 1);
-  stroke(120, 10, 68);
-  strokeWeight(15);
-  noFill()
-  bezier(310, 400, 220, 300+sin(frameCount/4)*40, 230, 470+cos(frameCount/4)*40, 170, 400); 
-  pop();
-  
-  if(inZone == false){
-   fill(120, 10, 68);
-  circle(635, 400, 50); 
-  fill('white');
-  circle(635, 400, 40); 
-  fill(0); circle(constrain(mouseX,630,640),constrain(mouseY,395,405),30)
-  }
-  else{
-    fill(204 - random(-x1/2,x1/2), 10, 114 ,80 + random(-30,30))
-  circle(635, 400,1+x1)
-    fill(120, 10, 68);
-  circle(635, 400, 50); 
-  fill('white');
-  circle(635, 400, 40); 
-  fill(0); 
-    circle(635, 400, 10);
-  }
+
+  flowerClicked(oValue){
+
+      this.y -= oValue/4;
+      this.opacity-= oValue *1.7;
+
+      if(this.opacity <= 0){
+        changeO = false;
+        flowerCounter --;
+        oValue = 0;
+        makeEye();
+        
+      }
+    }
    
-  //tentacle 5 END
-  
-  //tentacle 6 START (right side, mirrored)
-  push();
-  translate(width, 0);
-  scale(-1, 1);
-  stroke(120, 10, 68);
-  strokeWeight(15);
-  noFill()
-  bezier(490, 400, 580, 300 + sin(frameCount/4)*40, 570, 470 + cos(frameCount/4)*40, 630, 400); 
-  pop();
-  fill(120, 10, 68);
-  circle(160, 400, 50); 
-  fill('white');
-  circle(160, 400, 40); 
-  fill(0);
-  if(inZone == false){
-    fill(120, 10, 68);
-  circle(160, 400, 50); 
-  fill('white');
-  circle(160, 400, 40); 
-  fill(0);
-    circle(constrain(mouseX,155,165),constrain(mouseY,395,405),30)
-  }
-  else{
-    x1 += 1
-    fill(204 - random(-x1/2,x1/2), 10, 114 ,80 + random(-30,30))
-  circle(160,400,1+x1)
-    fill(120, 10, 68);
-  circle(160, 400, 50); 
-  fill('white');
-  circle(160, 400, 40); 
-  fill(0);
-    
-    fill(0)
-  circle(160, 400, 10); 
-    // fill('white')
-    // circle(160, 400, 5); 
-  }
-  //tentacle 8 END
-  
-  //print(x1)
-  
+
+
+
 }
 
+function makeEye(){
+  eyes.push(new eye(random(0, 2000), random(100, 700)));
 
-
-
-function draw_man(){
-  
-  if(pmouseX-mouseX >=0){
-    fill(113, 200, 222)
-  ellipse(mouseX-3,mouseY,10,7)
-  
-  push()
-  noStroke()
-  
-  fill(56, 171, 62)
-  rect(mouseX+7,mouseY-10,12,7)
-  fill(103, 201, 144)
-  rect(mouseX+5,mouseY-5,20,10)
-  
- 
-  pop()
-  
-  //legs
-  push()
-  fill(232, 195, 49)
-  noStroke()
-  rect(mouseX+40,mouseY+2 +sin(frameCount)* 2,10,6)
-  rect(mouseX+40,mouseY-8 +cos(frameCount)* 2,10,6)
-  stroke(103, 201, 144)
-  strokeWeight(3)
-  line(mouseX+40,mouseY+5 +sin(frameCount)* 2,mouseX+25, mouseY+3)
-  line(mouseX+40,mouseY-5+cos(frameCount)* 2,mouseX+25, mouseY-3)
-  
-  //hands
-  
-  stroke(232, 205, 151)
-  line(mouseX-20,mouseY+5 +sin(frameCount)* 2,mouseX+5, mouseY+3)
-  line(mouseX-20,mouseY-5+cos(frameCount)* 2,mouseX+5, mouseY-3)
-  
-  stroke(103, 201, 144)
-  line(mouseX-15,mouseY+5 +sin(frameCount)* 2,mouseX+5, mouseY+3)
-  line(mouseX-15,mouseY-5+cos(frameCount)* 2,mouseX+5, mouseY-3)
-  pop()
-  
-  
-  
-     
-  
-}
-  if(pmouseX-mouseX <0){
-    //body
-    fill(56, 171, 62)
-  rect(mouseX-27,mouseY-10,12,7)
-  fill(103, 201, 144)
-  rect(mouseX-27,mouseY-5,20,10)
-    //legs
-    push()
-  fill(232, 195, 49)
-  noStroke()
-  rect(mouseX-50,mouseY+2 +sin(frameCount)* 2,10,6)
-  rect(mouseX-50,mouseY-8 +cos(frameCount)* 2,10,6)
-  stroke(103, 201, 144)
-  strokeWeight(3)
-  line(mouseX-40,mouseY+5 +sin(frameCount)* 2,mouseX-20, mouseY+3)
-  line(mouseX-40,mouseY-5+cos(frameCount)* 2,mouseX-25, mouseY-3)
-  //hands
-  stroke(232, 205, 151)
-  line(mouseX+20,mouseY+5 +sin(frameCount)* 2,mouseX-5, mouseY+3)
-  line(mouseX+20,mouseY-5+cos(frameCount)* 2,mouseX-5, mouseY-3)
-  stroke(103, 201, 144)
-  line(mouseX+15,mouseY+5 +sin(frameCount)* 2,mouseX-5, mouseY+3)
-  line(mouseX+15,mouseY-5+cos(frameCount)* 2,mouseX-5, mouseY-3)
-  pop()
-  }
-   noStroke()
-  fill(232, 205, 151)
-  circle(mouseX ,mouseY ,15)
-  if(pmouseX-mouseX >=0){
-  fill(113, 200, 222)
-  ellipse(mouseX-3,mouseY,10,7)
-  }
-  else{
-     fill(113, 200, 222)
-  ellipse(mouseX+3,mouseY,10,7)
-  }
-  
- // mouseClicked()
-  
-  
 }
 
-
-
-
-
-function locate_man(){
-  if (pmouseX - mouseX <0){
-    push()
-    scale(-1,1)
-    draw_man()
-    pop()
+class eye{
+  constructor(x,y){
+    this.x = x;
+    this.y = y;
+    this.w = x;
+    this.h = y;
   }
-  else{
-    draw_man()
+
+  display(){
+    fill(255, 255, 255);
+    ellipse(this.x,this.y,70,50);
+    fill(0, 0, 0);
+    circle(this.x,this.y,30);
   }
+
+  update(){
+    this.x += random(-10, 10);
+    this.y += random(-10, 10);
+  }
+
   
+
 }
-
-function endScene(){
-  
-  if (teethend1<220){
-    teethend1 = teethend1+10
-  }
-  
-  push()
-  translate(-20,450 - teethend1)
-  fill(0)
-  rect(0,30,820,250)
-  fill('red')
-    textSize(100)
-    text("DIED",300,150)
-  fill('white')
-  scale(2.8)
-  for(i=0; i <30; i++){
-    
-    
-    triangle(5 + (i*10),10,15 + (i*10),10,10 + (i*10),0)
-    square(i*10,10,10)
-    
-  }
-  pop()
-  
-  push()
-  translate(0,0 +teethend1)
-  fill('white')
-  scale(2.8)
-  for(i=0; i <30; i++){
-    
-    triangle(0+ (i*10),10,10 + (i*10),10,5 + (i*10),20)
-    triangle(0 + (i*10),10,10 + (i*10),10,5 + (i*10),0)
-    square(i*10,0,10)
-    
-  }
-  
-  fill(0)
-  rect(0,-250,800,250)
-  
-  fill('red')
-    textSize(40)
-    text("You",100,-10)
-  pop()
-  
-  
-  
- 
-  
-  
-  // rect(0,0 + teethend1,800,50)
-  // rect(0,450 - teethend1,800,50)  
-}
-

@@ -1,9 +1,14 @@
 // document.getElementById('GoodResult').addEventListener('click', function() {
-//     window.location.href = 'good.html'; 
+//     window.location.href = 'good.html'; x
 //   });
+
+
   
   document.getElementById('submitButton').addEventListener('click', function() {
     if(totalScore>=0){
+
+      TotalScorer(totalScore);
+      
       window.location.href = 'good.html';
     }
     else{
@@ -13,9 +18,16 @@
     
     
   })
+  
+  
+window.totalScore = 0;
 
 
-var totalScore = 0;
+// function preload() {
+//   // Load sound file
+//   textSound = loadSound('assets/textNotification.mp3');
+// }
+
 
 var text1 = document.getElementById('appritiationText');
 var text2 = document.getElementById('angryFriend');
@@ -38,6 +50,8 @@ var email6 = document.getElementById('news');
 var email7 = document.getElementById('tv');
 var email8 = document.getElementById('cookies');
 
+var extra1 = document.getElementById('movie');
+
 
 
 
@@ -51,151 +65,288 @@ let dogPost = false;
 let housePost = false;
 let familyVacationPost = false;
 let tiktokPost = false;
+let transferGood = [];
+let transferBad = [];
+let spamMailer = false;
 
 text1.addEventListener('change', function() {
   if (text1.checked) {
-    totalScore += text1.value;
+    totalScore += Number(text1.value);
+    transferGood.push("appritiationText");
     AddMessage(text1, "Friend", "Thank you for the gift!!! I love it!");
+    
+    
+
+    
+  }
+  if(text1.checked === false){
+    totalScore -= Number(text1.value);
+    transferGood.pop("appritiationText");
   }
 });
 
 text2.addEventListener('change', function() {
   if (text2.checked) {
-    totalScore += text2.value;
+    totalScore += Number(text2.value);
+    transferBad.push("angryFriend");
     AddMessage(text2, "Another Friend", "Can't believe you posted that, my coworkers saw it and made it into a meme. My boss was not happy.");
+  }
+  if(text2.checked === false){
+    totalScore -= Number(text2.value);
+    transferBad.pop("angryFriend");
   }
 });
 
 text3.addEventListener('change', function() {
   if (text3.checked) {
-    totalScore += text3.value;
+    totalScore += Number(text3.value);
+    transferGood.push("congrats");
     AddMessage(text3, "Other Friend", "I appriciate your friendshiip. Love you!");
+  }
+  if(text3.checked === false){
+    totalScore -= Number(text3.value);
+    transferGood.pop("congrats");
   }
 });
 
 text4.addEventListener('change', function() {
   if (text4.checked) {
-    totalScore += text4.value;
+    totalScore += Number(text4.value);
+    transferBad.push("tiktok");
     AddMessage(text4, "Ex-coworker", "I know you don't work here anymore, but you just got a bunch of people fired. Hope you are happy \nwith your awareness raising.");
     tiktokPost = true;
     familyVacationPost = false;
     dogPost = false;
     housePost = false;
   
-  }});
+  }
+  if(text4.checked === false){
+    totalScore -= Number(text4.value);
+    transferBad.pop("tiktok");
+  }
+
+
+});
 
 text5.addEventListener('change', function() {
   if (text5.checked) {
-    totalScore += text5.value;
+    totalScore += Number(text4.value);
+    transferBad.push("familyVacation");
     AddMessage(text5, "Neighbor", "Hey, I came by your house to water your plants and the place was trashed. I think you got robbed...");
     familyVacationPost = true;
     tiktokPost = false;
     dogPost = false;
     housePost = false;
-  }});
+  }
+  if(text5.checked === false){
+    totalScore -= Number(text5.value);
+    transferBad.pop("familyVacation");
+  }
+
+});
 
 text6.addEventListener('change', function() {
   if (text6.checked) {
-    totalScore += text6.value;
+    totalScore += Number(text6.value);
+    transferGood.push("kangaroo");
     AddMessage(text6, "New Friend", "That article was hilarous.");
-}});
+}
+
+  if(text6.checked === false){
+    totalScore -= Number(text6.value);
+    transferGood.pop("kangaroo");
+  }
+});
 
 text7.addEventListener('change', function() {
   if (text7.checked) {
-    totalScore += text7.value;
+    totalScore += Number(text7.value);
+    transferBad.push("meme");
     AddMessage(text7, "Another Friend", "Is there a reason you liked a post that makes fun of my religion? I don't think we should be friends \nanymore.");
-}});
+}
+  if (text7.checked === false){
+    totalScore -= Number(text7.value);
+    transferBad.pop("meme");
+  }
+
+});
 
 text8.addEventListener('change', function() {
   if (text8.checked) { 
-    totalScore += text8.value;
+    totalScore += Number(text8.value);
+    transferGood.push("map");
     AddMessage(text8, "Boss", "I have decided to give you a raise because of your impressive efforts and punctuality.");
+  }
+  if(text8.checked === false){
+    totalScore -= Number(text8.value);
+    transferGood.pop("map");
   }
 });
 text9.addEventListener('change', function() {
-  if (text8.checked) { 
-    totalScore += text9.value;
+  if (text9.checked) { 
+    totalScore += Number(text9.value);
+    transferGood.push("concert");
     AddMessage(text9, "Old Friend", "That shirt is sick! Where did you get it from?");
+  }
+  if(text9.checked === false){
+    totalScore -= Number(text9.value);
+    transferGood.pop("concert");
   }
 });
 
 post1.addEventListener('change', function() {
   if (post1.checked) {
-    totalScore += post1.value;
+    postSound.play();
+    totalScore += Number(post1.value);
+    transferGood.push("dog");
     dogPost = true;
     familyVacationPost = false;
     tiktokPost = false;
     housePost = false;
   }
+  if(post1.checked === false){
+    totalScore -= Number(post1.value);
+    transferGood.pop("dog");
+  }
 });
 
 post2.addEventListener('change', function() {
   if (post2.checked) {
+    postSound.play();
     AddEmail(post2, "user_234523", "I know where you live.")
-    totalScore += post2.value;
+    totalScore += Number(post2.value);
+    transferBad.push("house");
     housePost = true;
     familyVacationPost = false;
     dogPost = false;
     tiktokPost = false;
   }
+  if(post2.checked === false){
+    totalScore -= Number(post2.value);
+    transferBad.pop("house");
+  }
 });
 
 email1.addEventListener('change', function() {
   if (email1.checked) {
-    totalScore += email1.value;
+    totalScore += Number(email1.value);
+    transferBad.push("linkedin");
     AddEmail(email1, "LinkedIn", "Alice got yet another promotion... What are you doing with your life?");
+  }
+  if(email1.checked === false){
+    totalScore -= Number(email1.value);
+    transferBad.pop("linkedin");
   }
 }); 
 
 email2.addEventListener('change', function() {
   if (email2.checked) {
-    totalScore += email2.value;
+    totalScore += Number(email2.value);
+    transferGood.push("news");
     AddEmail(email2, "NewsNow!", "Elections coming up! Vote for your believes");  
+  }
+  if(email2.checked === false){
+    totalScore -= Number(email2.value);
+    transferGood.pop("news");
   }
 });
 
 email3.addEventListener('change', function() {
   if (email3.checked) {
-    totalScore += email3.value;
+    totalScore += Number(email3.value);
+    transferBad.push("tweet");
     AddEmail(email3, "user DontMessWithMe sent you a message", "Your way of thinking blows my mind. You say that #$%# again, ill leak your IP address.");  
+  }
+  if(email3.checked === false){
+    totalScore -= Number(email3.value);
+    transferBad.pop("tweet");
   }
 });
 
 email4.addEventListener('change', function() {
   if (email4.checked) {
-    totalScore += email4.value;
+    totalScore += Number(email4.value);
+    transferGood.push("books");
     AddEmail(email4, "BooksForAll", "user_11727 has recommended a book you might like!");  
+  }
+  if(email4.checked === false){
+    totalScore -= Number(email4.value);
+    transferGood.pop("books");
   }
 });
 
 email5.addEventListener('change', function() {
   if (email5.checked) {
-    totalScore += email5.value;
+    totalScore += Number(email5.value);
+    transferGood.push("zoom");
     AddEmail(email5, "CCL&Co", "Dear applicant, we are happy to offer you a position at CCL&Co.");  
+  }
+  if(email5.checked === false){
+    totalScore -= Number(email5.value);
+    transferGood.pop("zoom");
   }
 });
 
 email6.addEventListener('change', function() {
   if (email6.checked) {
-    totalScore += email6.value;
+    totalScore += Number(email6.value);
+    transferGood.push("loans");
     AddEmail(email6, "MustKnowNews", "An increase in concern regarding student loans has led to governmental actions.");  
+  }
+  if(email6.checked === false){
+    totalScore -= Number(email6.value);
+    transferGood.pop("loans");
   }
 });
 
 email7.addEventListener('change', function() {
   if (email7.checked) {
-    totalScore += email7.value;
-    AddEmail(email7, "tv!", "tbd");  
+    totalScore += Number(email7.value);
+    transferBad.push("tv");
+    spamMailer = true;
+    spamName = ['NotAScammer', "FreeTees", "Aunt Suzie"]
+    spamContent = ['Donate to the National Cancer Institute', "Get a free tee by clicking bellow", "I need money ASAP"]
+    for (let i = 0; i < spamName.length; i++) {
+
+      setTimeout(AddEmail(email7, spamName[i], spamContent[i]), 10000);
+
+    }
+
+    
+   
+      
+  }
+  if(email7.checked === false){
+    totalScore -= Number(email7.value);
+    transferBad.pop("tv");
   }
 });
 
 email8.addEventListener('change', function() {
   if (email8.checked) {
-    totalScore += email8.value;
+    totalScore += Number(email8.value);
+    transferBad.push("cookies");
     AddEmail(email8, "Account Security", "Suspicious log in from Hai Phong, Vietnam. Please check your account.");  
+  }
+  if(email8.checked === false){
+    totalScore -= Number(email8.value);
+    transferBad.pop("cookies");
   }
 });
 
+extra1.addEventListener('change', function() {
+  if (extra1.checked) {
+    totalScore += Number(extra1.value);
+    transferBad.push("movie");
+    startReplication();
+    
+
+  }
+  if(extra1.checked === false){
+    totalScore -= Number(extra1.value);
+    transferBad.pop("movie");
+  }
+})
 
 
 
@@ -203,11 +354,69 @@ email8.addEventListener('change', function() {
 
 
 
+// function openMultiplePopups() {
+//   for (let i = 0; i < 10; i++) {
+//       // Open the popup at different positions
+//       setTimeout(() => {
+//         openPopup(i * 50, i * 50);
+//     }, i * 100);
+
+//   }
+// }
+
+// function openPopup(topPos, leftPos) {
+//   const popupContainer = document.getElementById("popupContainer");
+//   popupContainer.style.display = "block";
+//   popupContainer.style.top = topPos + "px";
+//   popupContainer.style.left = leftPos + "px";
+// }
+
+// function closePopup() {
+//   const popupContainer = document.getElementById("popupContainer");
+//   popupContainer.style.display = "none";
+// }
+
+let replicationInterval;
+let popupIndex = 0;
+
+function startReplication() {
+  
+    replicationInterval = setInterval(() => {
+        replicatePopup();
+    }, 100); // Replicate every second
+}
+
+function replicatePopup() {
+  if (popupIndex < 10) {
+    virusSound.play();
+    const popupContainer = document.getElementById("popupTemplate").cloneNode(true);
+    popupContainer.id = "popupContainer" + popupIndex;
+    popupContainer.style.display = "block";
+    popupContainer.style.top = Math.random() * (window.innerHeight - 200) + "px";
+    popupContainer.style.left = Math.random() * (window.innerWidth - 200) + "px";
+    
+    document.body.appendChild(popupContainer);
+    popupIndex++;
+  }
+}
+
+function closePopup(closeButton) {
+    const popupContainer = closeButton.parentNode.parentNode;
+    popupContainer.parentNode.removeChild(popupContainer);
+}
+
+// Stop replication after 10 seconds (for demonstration)
+setTimeout(() => {
+    clearInterval(replicationInterval);
+}, 3000); // Stop after 10 seconds
 
 
 
 
 
+
+
+let spamIndex = 0;
 let checkArray = [text1, text2, text3];
 let textContent = ['hiiiiii', 'byeeee',"Did you see Linkeidn?"];
 let names = ["Friend 1", "Friend 2", "Friend 3"];
@@ -216,9 +425,22 @@ let moving = false;
 let moveVar = 0;
 let moverVa2 = 0;
 let emails = [];
+//let totalScore = 0;
+
+let textSound;
+
+function preload() {
+  
+  textSound = loadSound("assets/textNotification.wav");
+  emailSound = loadSound("assets/emailNotification.wav");
+  postSound = loadSound("assets/postNotification.wav");
+  virusSound = loadSound("assets/virusSound.wav");
+}
 function setup() {
   let messageCanvas = createCanvas(750, 900);
   messageCanvas.parent("media");
+  //textSound.play();
+  
 }
 
 function draw() {
@@ -235,41 +457,89 @@ function draw() {
   fill("white");
   rect(5,5,500,390,10);
   rect(520,5,220,390,10);
+  push();
+  translate(0,50);
   beginShape();
   fill("purple");
   vertex(550, 70);
   bezierVertex(550 - 30 / 2, 70 - 30 / 2, 550 - 30, 70 + 30 / 3, 550, 70 + 30);
   bezierVertex(550 + 30, 70 + 30 / 3, 550 + 30 / 2, 70 - 30 / 2, 550, 70);
   endShape(CLOSE);
+  pop();
   
   if(dogPost === true){
     dog();
+
+    fill('purple');
+  textSize(20);
+  text("Likes: 348", 580,140);
+
+
+  push();
+  translate(0,50);
+  ellipse(550,140,40,30);
+  triangle(550,150,565,145,570,160);
+  text("Comments: 12",580,150);
+  pop();
+
     
   }
   if(housePost === true){
     
     house();
+
+    fill('purple');
+  textSize(20);
+  text("Likes: 238", 580,120);
+
+
+  push();
+  translate(0,50);
+  ellipse(550,140,40,30);
+  triangle(550,150,565,145,570,160);
+  text("Comments: 23",580,130);
+  pop();
+
   }
   if(tiktokPost === true){
     
     tiktok();
+
+    fill('purple');
+  textSize(20);
+  text("Likes: 914", 580,120);
+
+
+  push();
+  translate(0,50);
+  ellipse(550,140,40,30);
+  triangle(550,150,565,145,570,160);
+  text("Comments: 51",580,130);
+  pop();
   }
   if(familyVacationPost === true){
     
     familyPic();
-  }
-  
-  fill('purple');
+
+    fill('purple');
   textSize(20);
-  text("Likes: 58", 580,90);
-  
- 
+  text("Likes: 358", 580,120);
+
+
+  push();
+  translate(0,50);
   ellipse(550,140,40,30);
   triangle(550,150,565,145,570,160);
-  text("Comments: 12",580,150);
-
+  text("Comments: 41",580,130);
+  pop();
+  }
   
-
+  
+  
+ 
+  
+  
+  
 
 
 
@@ -286,6 +556,7 @@ function draw() {
     moveVar++;
     console.log(messages.length)
     messages[0].moveDown(moveVar);
+    
   }
   else{
     moveVar = 0;
@@ -348,14 +619,26 @@ function draw() {
   
 
 
+  //tempScore = getItem('totalScore');
+
+ 
 
 
 
 
-  
+  console.log("total score: ", totalScore);
    
+  storeItem('totalScore', totalScore);
+  storeItem('good', transferGood);
+  storeItem('bad', transferBad);
+
+
+
+
 
 }
+
+
 
     
   
@@ -363,6 +646,7 @@ function draw() {
   function AddMessage(input, name, textContent){
     if(input.checked === true){
       
+      textSound.play();
       messages.push(new Message(name, textContent))  
       console.log(input);
     }
@@ -377,6 +661,7 @@ function draw() {
   function AddEmail(input, sender, emailContent){
     if(input.checked === true){
       
+      emailSound.play();
       emails.push(new Email(sender, emailContent))  
       console.log(input);
     }
@@ -509,6 +794,10 @@ class Message{
   }
 }
 
+
+function TotalScorer(input){
+  storeItem('totalScore', input);
+}
 
 
 
@@ -679,8 +968,11 @@ function familyPic(){
   
 }
 
-
+function getTotalScore(){
+  return totalScore;
+}
     
+//export{ totalScore };
     
     
   

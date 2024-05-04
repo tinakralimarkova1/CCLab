@@ -274,3 +274,32 @@ input:checked ~ span::after{
 #submitButton:hover {
   background-color: #92599a;
 }
+
+.popup {
+  display: none;
+  position: fixed;
+  background-color: #9f1212;
+  border: 1px solid #ffc402;
+  padding: 20px;
+  z-index: 9999;
+}
+.popup p {
+  margin: 0;
+  font-size: 20px;
+  letter-spacing: 10px;
+  color: #fff700;
+}
+
+.popup-content {
+  text-align: center;
+
+}
+
+.close {
+  position: absolute;
+  top: 5px;
+  right: 10px;
+  color: #aaa;
+  font-size: 28px;
+  cursor: pointer;
+}
