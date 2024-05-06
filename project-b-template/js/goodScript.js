@@ -134,8 +134,8 @@ function draw() {
       if(texts[i] === 'dog' || texts[i] === 'concert' || texts[i] === 'kangaroo' ){
         //eyes.push(new eye(random(0, 2000), random(100, 700)));
 
-        fill(110, 103, 240,5);
-        rect(50,250,1700,130,20);
+        // fill(110, 103, 240,5);
+        // rect(50,250,1700,130,20);
 
         strokeWeight(4);
         //strokeColor("red");

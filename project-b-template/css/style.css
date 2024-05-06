@@ -26,6 +26,7 @@ h1 {
   text-align: left;
   color: rgb(83, 8, 87);
   font-size: 1.8vw; /* Set font size relative to viewport width */
+  line-height: 2em;
 }
 
 .content_Style_left {
@@ -34,6 +35,7 @@ h1 {
   text-align: left;
   color: rgb(83, 8, 87);
   font-size: 1.8vw; /* Set font size relative to viewport width */
+  line-height: 2em;
 }
 
 .content_right {
@@ -302,4 +304,8 @@ input:checked ~ span::after{
   color: #aaa;
   font-size: 28px;
   cursor: pointer;
+}
+
+#thirdPara{
+  margin-left: 70px;
 }

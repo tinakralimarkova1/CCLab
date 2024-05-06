@@ -130,6 +130,7 @@ function draw() {
 
       if(texts[i] === 'angryFriend' || texts[i] === 'tiktok' ){
         textSize(40);
+        
         fill("white");
 
         text("You are the type of person who posts on the internet without considering its effects on others", 100, 100);
@@ -138,8 +139,8 @@ function draw() {
       if(texts[i] === 'familyVacation' || texts[i] === 'house' || texts[i] === 'cookies' ){
         //eyes.push(new eye(random(0, 2000), random(100, 700)));
 
-        fill(110, 103, 240,5);
-        rect(50,250,1700,130,20);
+        // fill(110, 103, 240,5);
+        // rect(50,250,1700,130,20);
 
         strokeWeight(4);
         //strokeColor("red");

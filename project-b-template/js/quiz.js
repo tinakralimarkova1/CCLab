@@ -101,7 +101,7 @@ text3.addEventListener('change', function() {
   if (text3.checked) {
     totalScore += Number(text3.value);
     transferGood.push("congrats");
-    AddMessage(text3, "Other Friend", "I appriciate your friendshiip. Love you!");
+    AddMessage(text3, "Other Friend", "I appreciate your friendship. Love you!");
   }
   if(text3.checked === false){
     totalScore -= Number(text3.value);
@@ -149,7 +149,7 @@ text6.addEventListener('change', function() {
   if (text6.checked) {
     totalScore += Number(text6.value);
     transferGood.push("kangaroo");
-    AddMessage(text6, "New Friend", "That article was hilarous.");
+    AddMessage(text6, "New Friend", "That article was hilarious.");
 }
 
   if(text6.checked === false){
