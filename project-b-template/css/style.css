@@ -1,263 +1,190 @@
 html, body {
   height: 100%;
   background-color: rgb(29, 240, 177);
-  font-size: 10px; /* Set a base font size */
+  font-size: 22px; /* Set a base font size */
 }
 
 h1 {
   text-align: center; 
-  padding-top: 5%; 
+  padding-top: 30px; 
   margin: 0; 
   color: purple;
-  font-size: 3vw; /* Set font size relative to viewport width */
+  font-size: 3em; /* Set font size */
   font-family: Georgia, 'Times New Roman', Times, serif;
 }
 
 #author {
   text-align: center; 
-  font-size: 3em; /* Set font size relative to the parent element */
+  font-size: 2em; /* Set font size */
   color: rgba(90, 62, 90, 0.69);
   font-family: Georgia, 'Times New Roman', Times, serif;
 }
 
-.content_Style_right {
-  padding-top: 0%;
-  padding-right: 3%;
-  text-align: left;
-  color: rgb(83, 8, 87);
-  font-size: 1.8vw; /* Set font size relative to viewport width */
-  line-height: 2em;
-}
-
+.content_Style_right,
 .content_Style_left {
   padding-top: 0%;
-  padding-left: 3%;
+  padding-right: 30px;
+  padding-left: 30px;
   text-align: left;
   color: rgb(83, 8, 87);
-  font-size: 1.8vw; /* Set font size relative to viewport width */
+  font-size: 1.2em; /* Set font size */
   line-height: 2em;
 }
 
-.content_right {
-  padding: 2%;
-  
-  width: 100%;
-  height: 20%;
+.content_right,
+.content_left {
+  padding: 20px;
   display: flex;
   flex-direction: row; 
   justify-content: space-between;
   align-items: center; 
 }
-.content_left {
-  padding-top: 7%;
-  padding-left: 1%;
-  padding-right: 1%;
-  padding-bottom: 10%;
-
-  width: 100%;
-  height: 20%;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between; 
-  align-items: center;
-}
-
-
 
 .button {
   background-color: #4CAF50; /* Green */
   border: none;
   color: white;
-  padding: 1.5vw 3.2vw; /* Set padding relative to viewport width */
+  padding: 15px 32px; /* Set padding */
   text-align: center;
   text-decoration: none;
   display: inline-block;
-  font-size: 1vw; /* Set font size relative to viewport width */
-  margin: 2vw 0.4vw; /* Set margin relative to viewport width */
+  font-size: 1em; /* Set font size */
+  margin: 10px 5px; /* Set margin */
   cursor: pointer;
   font-family: Georgia, 'Times New Roman', Times, serif;
 }
 
 .image1 {
-  width: 30vw; /* Set width relative to viewport width */
+  width: 30%; /* Set width */
   height: auto; /* Maintain aspect ratio */
-  margin-right: 2vw; /* Set margin relative to viewport width */
+  margin-right: 20px; /* Set margin */
 }
 
 #toQuiz {
-  padding: 3vw; /* Set padding relative to viewport width */
-  font-size: 1.5vw; /* Set font size relative to viewport width */
+  padding: 20px; /* Set padding */
+  font-size: 1em; /* Set font size */
 }
 
 #quizButton {
   text-align: center;
-  padding: 2vw; /* Set padding relative to viewport width */
-}
-#index_canvas_container1 {
-  padding-left: 1%;
+  padding: 20px; /* Set padding */
 }
 
-#quizOutline{
-  
+#index_canvas_container1 {
+  padding-left: 30px;
+}
+
+#quizOutline {
   display: inline-flex;
   flex-direction: row;
-
-  
   border: 4px solid purple;
-
   border-radius: 15px;
-  
 }
 
-
-.questionContainer_left {
+.questionContainer_left,
+.questionContainer_right {
   width: 580px;
-  height: 770px;
-
- 
-
-  padding:25px, 40px, 25px, 25px;
-  
-
-  
+  height: auto;
+  padding: 25px; /* Set padding */
 }
 
-
-#quizOutline p{
+#quizOutline p {
   padding: 1px;
   width: 77%;
 }
-.row{
+
+.row {
   display: flex; 
   flex-wrap: wrap;
   align-items: center;
-  justify-content: space-between ;
-  margin: 0px ;   
-  font-size: 1.5vw;
+  justify-content: space-between;
+  margin: 0;
+  font-size: 1em; /* Set font size */
   margin-left: 35px;
-  color:  purple;
- 
-
+  color: purple;
 }
 
-label{
+label {
   position: relative;
   width: 100px;
   height: 30px;
-  
-  
-
 }
 
-input[type="checkbox"]{
-/* make it bigger */
+input[type="checkbox"] {
+  /* make it bigger */
   transform: scale(2.5);
   position: absolute;
   opacity: 0;
 }
 
-label span{
-  
+label span {
   display: block;
-  
   width: 35%;
-  
   height: 100%;
-  
   position: absolute;
-  
-  border: 3px solid  purple;
-  
+  border: 3px solid purple;
   border-radius: 6px;
-  
   cursor: pointer;
-
 }
 
-label span::after{
-  
+label span::after {
   content: "";
-  
   position: absolute;
-  
   left: 16px;
-  
   bottom: 5px;
-  
   width: 0px;
-  
   height: 40px;
-  
   border: solid #2600ff;
-  
   border-width: 0 6px 6px 0;
-
   transform: rotate(45deg);
-
   opacity: 0;
-
   transition: width 0.5s, height 0.5s, opacity 0.5s;
 }
 
-input:checked ~ span::after{
-  
+input:checked ~ span::after {
   width: 20px;
-  
   height: 40px;
-  
   opacity: 1;
 }
 
-.questionContainer_right {
-  width: 580px;
-  height: 830px;
- 
-
-  padding:25px, 40px, 25px, 25px;
-  
-
-  
-}
-
-#quizPage{
+#quizPage {
   margin-top: 3%;
   display: inline-flex;
   flex-direction: row;
   justify-content: space-between;
 }
 
-#media{
+#media {
   margin-left: 30px;
 }
 
-#messages{
+#messages {
   width: 750px;
   height: 200px;
   border: 3px solid purple;
   text-align: center;
-  
 }
 
-#messages p{
+#messages p {
   padding: 0px;
   margin: 0px;
   font-size: 20px;
   letter-spacing: 10px;
 }
 
-#post{
+#post {
   width: 750px;
   height: 400px;
   border: 3px solid purple;
 }
 
-#email{
+#email {
   width: 750px;
   height: 200px;
   border: 3px solid purple;
 }
 
-#submitButton{
+#submitButton {
   width: 400px;
   height: 50px;
   margin-top: 1%;
@@ -270,9 +197,10 @@ input:checked ~ span::after{
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  font-size: 36px;
+  font-size: 2em; /* Set font size */
   letter-spacing: 10px;
 }
+
 #submitButton:hover {
   background-color: #92599a;
 }
@@ -285,6 +213,7 @@ input:checked ~ span::after{
   padding: 20px;
   z-index: 9999;
 }
+
 .popup p {
   margin: 0;
   font-size: 20px;
@@ -294,7 +223,6 @@ input:checked ~ span::after{
 
 .popup-content {
   text-align: center;
-
 }
 
 .close {
@@ -306,6 +234,6 @@ input:checked ~ span::after{
   cursor: pointer;
 }
 
-#thirdPara{
+#thirdPara {
   margin-left: 70px;
 }
